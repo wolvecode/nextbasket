@@ -1,0 +1,45 @@
+version: "3.7"
+
+services:
+  users:
+    build:
+      dockerfile: ./services/users/Dockerfile
+    container_name: users
+    ports:
+      - "9000:8000"
+    depends_on:
+      - rabbitmq
+    networks:
+      - sender
+
+  notifications:
+    build:
+      dockerfile: ./services/notifications/Dockerfile
+    container_name: notifications
+    environment:
+      - RABBITMQ_HOST=rabbitmq-server
+      - RABBITMQ_PORT=5672
+      - RABBITMQ_USER=root
+      - RABBITMQ_PASSWORD=secret
+    depends_on:
+      - rabbitmq
+    restart: on-failure:10
+    networks:
+      - listener
+
+  rabbitmq:
+    image: rabbitmq:latest
+    hostname: rabbitmq
+    container_name: rabbitmq-server
+    networks:
+      - sender
+      - listener
+    environment:
+      - RABBITMQ_DEFAULT_USER=root
+      - RABBITMQ_DEFAULT_PASS=secret
+
+networks:
+  sender:
+    driver: bridge
+  listener:
+    driver: bridge
