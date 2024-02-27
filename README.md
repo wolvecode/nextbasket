@@ -25,6 +25,11 @@
 3. The services/notifications notification worker
 4. The `docker-compose.yml` file to boostrap the all services.
 
+ The users service image is named **`wolvecode/nextbasket-users`**, and the notifications service image is **`wolvecode/nextbasket-notifications`**. You can pull both image running
+```shell
+docker pull wolvecode/nextbasket-users && docker pull wolvecode/nextbasket-notifications
+```
+
 ## Getting Started
 The rest of this guide assume that you have Docker running. Each of the microservices has its own image
 on the Docker Hub. The easiest way (and the preferred way) is to use `docker-compose` to start the services as described
@@ -36,7 +41,7 @@ docker-compose up
 After the services are all up and running, you can use your [Postman](https://postman.com) or any client request tool
 to make request to the `users` service endpoint, OR you simply use `curl` as
 ```shell
-curl http://127.0.0.1:9000/ -X POST -H "Content-Type: application/json" -d '{"email": "wolvcode@gmail.com", "firstName": "Biodun", "lastName": "Azeez"}'
+curl http://127.0.0.1:9000/users -X POST -H "Content-Type: application/json" -d '{"email": "wolvcode@gmail.com", "firstName": "Biodun", "lastName": "Azeez"}'
 ```
 
 ## Inspecting Logs

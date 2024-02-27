@@ -1,7 +1,7 @@
 FROM php:8.2.16-fpm-bullseye
 
 RUN apt-get update && docker-php-ext-install sockets && docker-php-ext-enable sockets
-RUN apt-get update && apt-get install -y \
+RUN apt-get install -y \
   libzip-dev \
   zip \
   unzip \

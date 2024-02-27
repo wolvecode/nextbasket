@@ -2,8 +2,7 @@ version: "3.7"
 
 services:
   users:
-    build:
-      dockerfile: ./services/users/Dockerfile
+    image: wolvecode/nextbasket-users
     container_name: users
     ports:
       - "9000:8000"
@@ -13,8 +12,7 @@ services:
       - sender
 
   notifications:
-    build:
-      dockerfile: ./services/notifications/Dockerfile
+    image: wolvecode/nextbasket-notifications
     container_name: notifications
     environment:
       - RABBITMQ_HOST=rabbitmq-server
