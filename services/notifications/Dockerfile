@@ -15,4 +15,4 @@ RUN chmod +x composer
 
 RUN ./composer update && ./composer install
 
-ENTRYPOINT ["./start.sh"]
+ENTRYPOINT ["sh", "start.sh"]

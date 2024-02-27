@@ -20,10 +20,6 @@ class Log
      */
     public function __construct(string $filePath)
     {
-        if ( !file_exists($filePath)) {
-            throw new \Exception("File does not exist: ${filePath}");
-        }
-
         $this->filePath = $filePath;
         $this->handler = fopen($filePath, 'a+');
     }
